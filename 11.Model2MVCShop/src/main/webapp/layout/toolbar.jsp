@@ -99,7 +99,13 @@
    	
    	
    	<script type="text/javascript">
-	
+  
+   	
+   	function history(){
+		popWin = window.open("/history.jsp",
+													"popWin",
+													"left=300, top=200, width=300, height=200, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+	}
 		//============= logout Event  처리 =============	
 		 $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
@@ -128,6 +134,29 @@
 			
 			$(self.location).attr("href","../miniGame/randomView.jsp;");
 		}); 
+		
+		$( "a:contains('판매상품등록')" ).on("click" , function() {
+			
+			$(self.location).attr("href","/product/addProduct;");
+		}); 
+		
+		$( "a:contains('판매상품관리')" ).on("click" , function() {
+			
+			$(self.location).attr("method","POST").attr("href","/product/listProductManage;");
+		}); 
+		
+		$( "a:contains('상 품 검 색')" ).on("click" , function() {
+			
+			$(self.location).attr("method","POST").attr("href","/product/listProduct;");
+		}); 
+		
+		$( "a:contains('최근본상품')" ).on("click" , function() {
+			
+			javascript:history();
+		}); 
+		
+		
+		
 		
 		
 	</script>  

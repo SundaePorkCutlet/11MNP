@@ -24,11 +24,40 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 
 <html>
 <head>
-<title>상품 목록조회</title>
 
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script type="text/javascript">
+	<meta charset="EUC-KR">
+	
+	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
+	
+	<!-- Bootstrap Dropdown Hover CSS -->
+   <link href="/css/animate.min.css" rel="stylesheet">
+   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+    <!-- Bootstrap Dropdown Hover JS -->
+   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+   
+   
+   <!-- jQuery UI toolTip 사용 CSS-->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- jQuery UI toolTip 사용 JS-->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
+	<!--  ///////////////////////// CSS ////////////////////////// -->
+	<style>
+	  body {
+            padding-top : 50px;
+        }
+    </style>
+    
+     <!--  ///////////////////////// JavaScript ////////////////////////// -->
+	<script type="text/javascript">
 
 // 검색 / page 두가지 경우 모두 Form 전송을 위해 JavaScrpt 이용  
 // function fncGetUserList(currentPage) {
@@ -46,7 +75,8 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 	 
 	 $(function() {
 			
-		 $( "td.ct_btn01:contains('검색')" ).on("click" , function() {
+		 $( "button.btn.btn-default" ).on("click" , function() {
+
 			 fncGetUserList(1)
 						
 					});
@@ -56,9 +86,9 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 		 
 
 	 
-		$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
+		$( ".ct_list_pop td:nth-child(6)" ).on("click" , function() {
 			//Debug..
-			//alert(  $( this ).text().trim() );
+// 			alert(  $( this ).text().trim() );
 
 			// 			if($(this).attr("id")=='amount'){
 // 			self.location ="/product/getProduct?prodNo="+$(this).attr("data-prodNo")}
@@ -79,15 +109,15 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 							//Debug...
 							//alert(status);
 							//Debug...
-							//alert("JSONData : \n"+JSONData);
+// 							alert("JSONData : \n"+JSONData);
 							
-							var displayValue = "<h3>"
+							var displayValue = "<h6>"
 														+"상품번호 : "+JSONData.prodNo+"<br/>"
 														+"상품명 : "+JSONData.prodName+"<br/>"
 														+"가격 : "+JSONData.price+"<br/>"
 														+"수량 : "+JSONData.amount+"<br/>"
 														+"상세정보 : "+JSONData.prodDetail+"<br/>"
-														+"</h3>";
+														+"</h6>";
 							//Debug...									
 							//alert(displayValue);
 							$("h3").remove();
@@ -104,10 +134,10 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 			
 		});
 			
-			$(".addPurchase").on("click" , function() {
+			$(".ct_list_pop td:nth-child(2)").on("click" , function() {
 				
-				
-				self.location="/product/getProduct?prodNo="+$(this).attr("data-prodNo");
+				if($(this).attr("id")=='amount'){
+				self.location="/product/getProduct?prodNo="+$(this).attr("data-prodNo");}
 			});
 			
 			
@@ -116,7 +146,7 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 	
 	//==> UI 수정 추가부분  :  userId LINK Event End User 에게 보일수 있도록 
 	
-	$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
+	$( ".ct_list_pop td:nth-child(2)" ).css("color" , "red");
 	$("h7").css("color" , "red");
 	
 	
@@ -128,114 +158,77 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 
 </head>
 
-<body bgcolor="#ffffff" text="#000000">
-
-<div style="width:98%; margin-left:10px;">
-
-<form name="detailForm" >
-
-<table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
-	<tr>
-		<td width="15" height="37">
-			<img src="/images/ct_ttl_img01.gif" width="15" height="37"/>
-		</td>
-		<td background="/images/ct_ttl_img02.gif" width="100%" style="padding-left:10px;">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="93%" class="ct_ttl01">
-					
-					
-				
-							상품 목록 조회
-		
-					</td>
-				</tr>
-			</table>
-		</td>
-		<td width="12" height="37">
-			<img src="/images/ct_ttl_img03.gif" width="12" height="37"/>
-		</td>
-	</tr>
-</table>
+<body>
 
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
-	<tr>
+<jsp:include page="/layout/toolbar.jsp" />
+   	<!-- ToolBar End /////////////////////////////////////-->
 	
-	<td align="right">
+	<!--  화면구성 div Start /////////////////////////////////////-->
+	<div class="container">
 	
+		<div class="page-header text-info">
+	       <h3>상품목록조회</h3>
+	    </div>
+	    
+	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
+	    <div class="row">
+	    
+		    <div class="col-md-6 text-left">
+		    	<p class="text-primary">
+		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+		    	</p>
+		    </div>
+			 <div class="col-md-12 text-right">
+			    <form class="form-inline" name="detailForm">
+			    
+				  <div class="form-group">
 			<input type="radio" name="orderOption" id = "orderOption0" value="0"  ${ ! empty search.orderOption && search.orderOption==0 ? "checked" : "" }/><label for = "orderOption0">상품명순</label>		 
 		<input type="radio" name="orderOption" id = "orderOption1" value="1"  ${ ! empty search.orderOption && search.orderOption==1 ? "checked" : "" }/><label for = "orderOption1">높은가격순</label>
 		<input type="radio" name="orderOption" id = "orderOption2" value="2"  ${ ! empty search.orderOption && search.orderOption==2 ? "checked" : "" }/><label for = "orderOption2">낮은가격순</label>														
 		<input type="radio" name="orderOption" id = "orderOption3" value="3"  ${ ! empty search.orderOption && search.orderOption==3 ? "checked" : "" }/><label for = "orderOption3">최신순</label>														
 		<input type="radio" name="orderOption" id = "orderOption4" value="4"  ${ ! empty search.orderOption && search.orderOption==4 ? "checked" : "" }/><label for = "orderOption4">오래된순</label>														
-			
-		
-<!-- 				<td align="right"> -->
-<!-- 			<select name="orderOption" class="ct_input_g" style="width:80px"> -->
-<%-- 			<option value="0"  ${ ! empty search.orderOption && search.orderOption==0 ? "selected" : "" }>상품명순</option>			  --%>
-<%-- 		<option value="1"  ${ ! empty search.orderOption && search.orderOption==1 ? "selected" : "" }>높은가격순</option>								 --%>
-<!-- 			</select> -->
-			
-			
-		
-		
-			<select name="searchCondition" class="ct_input_g" style="width:80px">
+			</div>
+
+			<div class="form-group">	
+			<select class="form-control" name="searchCondition" >
 				<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
 				<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option>
 				<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
 		
-		</select>
-		<input type="text" name="searchKeyword" value="${! empty search.searchKeyword ? search.searchKeyword : ""}"   class="ct_input_g" style="width:200px; height:19px" >
-		</td>
+			</select>
+		</div>
 		
+		<div class="form-group">
+		 <label class="sr-only" for="searchKeyword">검색어</label>
+				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : ""}"   class="ct_input_g" style="width:200px; height:19px" >
+		</div>
 		
-		
-		<td align="right" width="70">
-			<table border="0" cellspacing="0" cellpadding="0">
-				<tr>
-							
-				
-				
-				
-				
-					<td width="17" height="23">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23">
-					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						검색
-					</td>
-					<td width="14" height="23">
-						<img src="/images/ct_btnbg03.gif" width="14" height="23">
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
+				  <button type="button" class="btn btn-default">검색</button>
+				  
+				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
 
+			</form>
+			</div>
+			</div>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
-	<tr>
-		<td colspan="11" >전체  ${resultPage.totalCount } 건수, 현재 ${resultpage.currentPage } 페이지</td>
-	</tr>
-	<tr>
-		<td class="ct_list_b" width="100">No</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">상품명</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">가격</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b">등록일</td>	
-		<td class="ct_line02"></td>
-		<td class="ct_list_b">수량</td>
-		<td class="ct_line02"></td>
+<table class="table table-hover table-striped" >
+      
+        <thead>
+          <tr>
+            <th align="center">No</th>
+            <th align="left" >상품명</th>
+            <th align="left">가격</th>
+            <th align="left">등록일</th>
+            <th align="left">수량</th>
+            <th align="left">간략정보</th>
+          </tr>
+        </thead>
+       
+		<tbody>
+
 	
-		
-	</tr>
-	<tr>
-		<td colspan="11" bgcolor="808285" height="1"></td>
-	</tr>
 	
 	
 	<c:set var="i" value="0" />
@@ -244,7 +237,7 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 	
 	<tr class="ct_list_pop">
 		<td align="center">${i}</td>
-		<td></td>
+
 				<c:if test="${product.amount!=0 }">
 				<td id ="amount" data-prodNo="${product.prodNo }" align="left">
 				
@@ -260,52 +253,37 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 				</c:if>
 				
 		
-		<td></td>
 		
 		<td align="left">${product.price }</td>
-		<td></td>
+
 		<td align="left">${product.regDate }</td>
-		<td></td>
+	
 		<c:if test="${product.amount!=0 }">
 		<td align="left">${product.amount }</td>
-		<td></td>
+		
 		</c:if>
 		<c:if test="${product.amount==0 }">
 		<td align="left">품절된 상품입니다.</td>
-		<td></td>
+
 		
 		</c:if>
-		<tr>
-		<td id="${product.prodNo}" class = "addPurchase" data-prodNo="${product.prodNo }" data-amount="${product.amount }" colspan="11" bgcolor="D6D7D6" height="1"></td>
-		
-		
-		
-	
-	
-		
-
-				
+		 <td align="left" data-prodNo="${product.prodNo }" data-amount="${product.amount }">
+		<i id="${product.prodNo}" class = "addPuchase"  colspan="11" bgcolor="D6D7D6" height="1">click!</i>
+		<input type="hidden" value="${product.prodNo}">
+	</td>
 	</tr>
-	
-	
-
-
 	</c:forEach>
+	</tbody>
 </table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
-	<tr>
-		<td align="center">
-			 <input type="hidden" id="currentPage" name="currentPage" value=""/>
-		
-			<jsp:include page="../common/pageNavigator.jsp"/>	
-    	</td>
-	</tr>
-</table>
-<!--  페이지 Navigator 끝 -->
-
-</form>
 
 </div>
+			<div align = "center">
+			<jsp:include  page="../common/pageNavigator.jsp"/>	
+			</div>
+<!--  페이지 Navigator 끝 -->
+
+
+
+
 </body>
 </html>

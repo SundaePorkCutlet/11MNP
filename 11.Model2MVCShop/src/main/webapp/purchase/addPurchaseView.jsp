@@ -8,10 +8,20 @@
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
 	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
-<title>Insert title here</title>
+
 
 <script type="text/javascript" src="../javascript/calendar.js">
 </script>
+
+
+	<style>
+       body > div.container{
+        	border: 3px solid #D6CDB7;
+            margin-top: 10px;
+        }
+    </style>
+
+
 
 <script type="text/javascript">
 <!--
@@ -49,6 +59,19 @@ $(function() {
 </head>
 
 <body>
+
+	<div class="navbar  navbar-default">
+        <div class="container">
+        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
+</div>
+</div>
+
+
+	<div class="container">
+	
+		<h1 class="bg-primary text-center">물 건 등 록</h1>
+
+
 
 <form name="addPurchase" >
 
