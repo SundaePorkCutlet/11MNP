@@ -84,10 +84,11 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 		 $(".ct_list_pop td:nth-child(2)").on("click", function() {
 				//Debug..
 				//alert(  $( this ).text().trim() );
-				console.log('여기도달')
-				console.log('${product.prodNo}')
-				alert($(this).attr("id"))
-				self.location ="/product/updateProduct?prodNo="+$(this).attr("id")+"&amount="+$(this).attr("data-amount");
+			
+// 				alert($(this).attr("data-prodNo"))
+// 				alert($(this).attr("data-amount"))
+				
+				self.location ="/product/updateProduct?prodNo="+$(this).attr("data-prodNo")+"&amount="+$(this).attr("data-amount");
 			});
 		
 		 
@@ -254,7 +255,7 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 		<td align="center">${i}</td>
 
 			
-				<td  data-prodNo="${product.prodNo }" align="left">
+				<td  data-prodNo="${product.prodNo }" data-amount="${product.amount }" align="left">
 				
 				${product.prodName }
 				</td>

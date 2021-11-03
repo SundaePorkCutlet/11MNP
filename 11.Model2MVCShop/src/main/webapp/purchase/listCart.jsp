@@ -8,13 +8,42 @@
 
 <html>
 <head>
-<title>구매 목록조회</title>
 
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script type="text/javascript">
+	<meta charset="EUC-KR">
+	
+	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
+	
+	<!-- Bootstrap Dropdown Hover CSS -->
+   <link href="/css/animate.min.css" rel="stylesheet">
+   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+    <!-- Bootstrap Dropdown Hover JS -->
+   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+   
+   
+   <!-- jQuery UI toolTip 사용 CSS-->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- jQuery UI toolTip 사용 JS-->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
+	<!--  ///////////////////////// CSS ////////////////////////// -->
+	<style>
+	  body {
+            padding-top : 10px;
+        }
+    </style>
+    
+     <!--  ///////////////////////// JavaScript ////////////////////////// -->
+	<script type="text/javascript">
 function cart(){
-	popWin = window.open("/purchase/deleteCart?prodNo=${cart.purchaseProd.prodNo}&menu=search","popWin","left=300, top=200, width=300, height=200, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+	popWin = window.open("/purchase/deleteCart?prodNo=${cart.purchaseProd.prodNo}","popWin","left=300, top=200, width=200, height=400, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
 }
 function fncGetUserList(currentPage) {
 // 	document.getElementById("currentPage").value = currentPage;
@@ -55,49 +84,43 @@ $(function() {
 </script>
 </head>
 
-<body bgcolor="#ffffff" text="#000000">
+<body >
 
-<div style="width: 98%; margin-left: 10px;">
+<div class="container">
+	
+		<div class="page-header text-info">
+	       <h3>장바구니</h3>
+	    </div>
 
-<form name="detailForm" >
-
-<table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
-	<tr>
-		<td width="15" height="37"><img src="/images/ct_ttl_img01.gif"width="15" height="37"></td>
-		<td background="/images/ct_ttl_img02.gif" width="100%" style="padding-left: 10px;">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="93%" class="ct_ttl01">장바구니 목록조회</td>
-				</tr>
-			</table>
-		</td>
-		<td width="12" height="37"><img src="/images/ct_ttl_img03.gif"	width="12" height="37"></td>
-	</tr>
-</table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0"	style="margin-top: 10px;">
-	<tr>
-		<td colspan="11">전체 ${resultPage.totalCount } 건수, 현재${resultpage.currentPage } 페이지</td>
-	</tr>
-	<tr>
-		<td class="ct_list_b" width="100">No</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">상품명</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">가격</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">남은수량</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">삭제</td>
+<div class="row">
+	    
+		    <div class="col-md-6 text-left">
+		    	<p class="text-primary">
+		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+		    	</p>
+		    </div>
+			 <div class="col-md-12 text-right">
+			 
+					</div>
+<table class="table table-hover table-striped" >
+      
+        <thead>
+          <tr>
+            <th align="center">No</th>
+            <th align="left" >상품명</th>
+            <th align="left">가격</th>
+            <th align="left">남은수량</th>
+            <th align="left">삭제</th>
+          </tr>
+        </thead>
+       
+		<tbody>
 		
-	<tr>
-		<td colspan="11" bgcolor="808285" height="1"></td>
-	</tr>
-	<c:set var="i" value="0" />
+		<c:set var="i" value="0" />
 	<c:forEach var="cart" items="${list}">
 		<c:set var="i" value="${i+1}"/>
-
-	<tr class="ct_list_pop">
+	
+		<tr class="ct_list_pop">
 		<td align="center" class ="getProduct1" data-prodNo="${cart.purchaseProd.prodNo}" data-amount="${cart.amount }" >
 		<c:if test="${cart.amount!=0 }">
 			${cart.purchaseProd.prodNo}
@@ -134,39 +157,25 @@ $(function() {
 			&#128701;
 		</td>
 		<td></td>
-		
 	
-
-	
-	
-		
-
-		
-	
-		
-	</tr>
-	<tr>
-		<td colspan="11" bgcolor="D6D7D6" height="1"></td>
 	</tr>
 	</c:forEach>
+	</tbody>
 </table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 10px;">
-	<tr>
-		<td align="center"></td>
-		<td>
-		   <input type="hidden" id="currentPage" name="currentPage" value=""/>
-		<jsp:include page="../common/pageNavigator.jsp"/>
-	
-		</td>
-		
-	</tr>
-</table>
-
-<!--  페이지 Navigator 끝 -->
-</form>
 
 </div>
+</div>
+
+
+
+		<div align="center">
+		<jsp:include page="../common/pageNavigator.jsp"/>
+	
+		</div>
+
+<!--  페이지 Navigator 끝 -->
+
+
 
 </body>
 </html>
