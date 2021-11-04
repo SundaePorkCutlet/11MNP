@@ -96,23 +96,23 @@ public class PurchaseController {
 
 		Product product = productService.getProduct(prodNo);
 		
-		int totalamount = product.getAmount() - amount;
+		int totalamount = (product.getAmount() - amount);
 		System.out.println("aaaaa"+totalamount);
 		System.out.println("bbbbb"+amount);
 		
-		product.setAmount(totalamount);
-		productService.updateProduct(product);
+		
 		
 		
 		User user = (User)request.getSession(true).getAttribute("user");
-		int remainPoint = user.getPoint()-product.getPrice();
+		int remainPoint = user.getPoint()-product.getPrice()*amount;
 		
 		System.out.println(remainPoint);
 		System.out.println("구매방법"+purchase.getPaymentOption());
 		if(purchase.getPaymentOption().equals("3")) {
 		if(remainPoint>0) {
 			System.out.println("포인트구매 진입");
-			
+			product.setAmount(totalamount);
+			productService.updateProduct(product);
 			user.setPoint(remainPoint);
 			purchase.setPurchaseProd(product);
 			purchase.setBuyer((User)(request.getSession(true).getAttribute("user")));
@@ -126,6 +126,8 @@ public class PurchaseController {
 			
 		}
 		}else {
+			product.setAmount(totalamount);
+			productService.updateProduct(product);
 			purchase.setPurchaseProd(product);
 			purchase.setBuyer((User)(request.getSession(true).getAttribute("user")));
 			purchase.setDivyAddr(Addr);

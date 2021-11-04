@@ -147,7 +147,7 @@ $(function() {
 		  <div class="form-group">
 		    <label for="fileName1" class="col-sm-offset-1 col-sm-3 control-label">상품이미지</label>
 		    <div class="col-sm-4">
-		      <input type="file" class="form-control" id="fileName1" name="filraName1" placeholder="가격"
+		      <input type="file" class="form-control" id="fileName1" name="fileName1" placeholder="가격"
 		      >
 		    </div>
 		  </div>
