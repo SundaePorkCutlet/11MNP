@@ -7,7 +7,9 @@
 Product productVO = (Product)request.getAttribute("vo");
 %>
 --%>
-
+<html lang="ko">
+	
+<head>
 	<meta charset="EUC-KR">
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
@@ -35,31 +37,29 @@ Product productVO = (Product)request.getAttribute("vo");
 
 <script type="text/javascript">
 
+$(function() {
+	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+	$( "button.btn.btn-primary" ).on("click" , function() {
+		self.location = "/purchase/addPurchase?prod_no=${product.prodNo}"	
+				});
+});	
 
 $(function() {
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
-	 $( "td.ct_btn01:contains('이전')" ).on("click" , function() {
-		//Debug..
-		//alert(  $( "td.ct_btn01:contains('확인')" ).html() );
+	$("#cancel").on("click" , function() {
 		history.go(-1);
 	});
-	
-	 $( "td.ct_btn01:contains('구매')" ).on("click" , function() {
-			//Debug..
-			//alert(  $( "td.ct_btn01:contains('수정')" ).html() );
-			self.location = "/purchase/addPurchase?prod_no=${product.prodNo}"
-		});
-	 
-	 $( "td.ct_btn01:contains('장바구니담기')" ).on("click" , function() {
-			//Debug..
-			//alert(  $( "td.ct_btn01:contains('수정')" ).html() );
-			self.location = "/purchase/addCart?prodNo=${product.prodNo }"
-		});
-	 
-	 
-	 
-});
+});	
+
+$(function() {
+	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+	$("a[href='##' ]").on("click" , function() {
+		self.location = "/purchase/addCart?prodNo=${product.prodNo }"
+	});
+});	
+
+
+
 </script>
 
 
@@ -125,71 +125,24 @@ $(function() {
 		
 		<hr/>
 		
-
+<div class="form-group">
+		    <div class="col-sm-offset-4  col-sm-4 text-center">
+		     	<c:if test="${cart!='true'}">
+		      <a class="btn btn-primary btn" href="##" role="button">장바구니담기</a>
+		      </c:if>
+		      <button type="button" class="btn btn-primary"  >구 &nbsp;매</button>
+			  <a class="btn btn-primary btn" href="#" role="button" id="cancel">이&nbsp;전</a>
+		    </div>
+		  </div>
 	
 			
 			
 </div>
 
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0"	style="margin-top: 10px;">
-	<tr>
-		<td width="53%"></td>
-		<td align="right">
 
-		<table border="0" cellspacing="0" cellpadding="0">
-			
-			
-			
-			
-			
-			<tr>
-			<c:if test="${cart!='true'}">
-					<td width="17" height="23">
-					<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
-				</td>
-				<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-					장바구니담기
-				</td>
-				<td width="14" height="23">
-					<img src="/images/ct_btnbg03.gif" width="14" height="23">
-				</td>
-				<td width="30"></td>
-			</c:if>
-		
-				<td width="17" height="23">
-					<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
-				</td>
-				<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-				구매
-				</td>
-				<td width="14" height="23">
-					<img src="/images/ct_btnbg03.gif" width="14" height="23">
-				</td>
-				<td width="30"></td>
-		
-		
-				<td width="17" height="23">
-					<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
-				</td>
-				<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-				이전
-				</td>
-				<td width="14" height="23">
-					<img src="/images/ct_btnbg03.gif" width="14" height="23">
-				</td>
-			</tr>
 
-	
-		
-			
-			
-		</table>
 
-		</td>
-	</tr>
-</table>
-</form>
 
 </body>
 </html>

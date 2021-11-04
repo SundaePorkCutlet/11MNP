@@ -53,11 +53,12 @@ function fncAddProduct(){
 // 	var detail = document.detailForm.prodDetail.value;
 // 	var manuDate = document.detailForm.manuDate.value;
 // 	var price = document.detailForm.price.value;
-
+	var prodNo=$("button.btn.btn-primary" ).attr("data-prodNo");
 	var name=$("input[name='prodName']").val();
 	var detail=$("input[name='prodDetail']").val();
 	var manuDate=$("input[name='manuDate']").val();
 	var price=$("input[name='price']").val();
+	var amount=$("input[name='amount']").val();
 
 	if(name == null || name.length<1){
 		alert("상품명은 반드시 입력하여야 합니다.");
@@ -160,14 +161,10 @@ $(function() {
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >등 &nbsp;록</button>
+		      <button type="button" class="btn btn-primary" data-prodNo="${product.prodNo }" >등 &nbsp;록</button>
 			  <a class="ct_btn01" href="#" role="button">취&nbsp;소</a>
 		    </div>
 		  </div>
-
-
-
-
 
 </form>
 </div>

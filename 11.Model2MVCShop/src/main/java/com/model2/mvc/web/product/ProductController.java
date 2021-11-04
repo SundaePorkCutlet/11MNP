@@ -67,11 +67,11 @@ public class ProductController {
 									) throws Exception {
 
 		System.out.println("/addProduct : POST");
-		System.out.println(file);
-		//Business Logic
-
-		product.setFileName(file.getOriginalFilename());
 		
+		//Business Logic
+		if(file!=null) {
+		product.setFileName(file.getOriginalFilename());
+		}
 		Product prod = productService.getProduct(product.getProdNo());
 		System.out.println("pppppp"+prod);
 		
