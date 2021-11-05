@@ -148,7 +148,7 @@
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
-	
+		  
 		<div class="page-header text-info">
 	       <h3>구매목록조회</h3>
 	    </div>
@@ -160,8 +160,15 @@
 		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
 		    	</p>
 		  </div>
-		
-		    
+		 <div class="col-md-12 text-right">
+			    <form class="form-inline" name="detailForm">
+		      <input type="hidden" id="currentPage" name="currentPage" value=""/>
+
+			</form>
+			</div>
+		      
+		      
+		      
 	   <table class="table table-hover table-striped" >
       
         <thead>
@@ -242,20 +249,23 @@
 	</tr>
 
 </c:forEach>
+
 </tbody>
+
 </table>
-    </div>
+</div>
+</div>
 
 
 
 		<div align="center">
 		<jsp:include page="../common/pageNavigator.jsp"/>
 	
-</div>		
+		</div>		
 
 
 
-</div>
+
 
 </body>
 </html>

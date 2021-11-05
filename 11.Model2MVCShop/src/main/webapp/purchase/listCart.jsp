@@ -72,7 +72,7 @@ $(function() {
 		 }
 				});
 	 
-	 $('#delete').on("click" , function() {
+	 $('.delete').on("click" , function() {
 			
 		 alert('가즈아')
 		 self.location ="/purchase/deleteCart?prodNo="+$(this).attr("data-prodNo")
@@ -102,12 +102,20 @@ $(function() {
 			 <div class="col-md-12 text-right">
 			 
 					</div>
+					
+					
+					<div class="col-md-12 text-right">
+			    <form class="form-inline" name="detailForm">
+		      <input type="hidden" id="currentPage" name="currentPage" value=""/>
+
+			</form>
+			</div>
 <table class="table table-hover table-striped" >
       
         <thead>
           <tr>
             <th align="center">No</th>
-            <th align="left" >상품명</th>
+            <th align="center" >상품명</th>
             <th align="left">가격</th>
             <th align="left">남은수량</th>
             <th align="left">삭제</th>
@@ -121,7 +129,7 @@ $(function() {
 		<c:set var="i" value="${i+1}"/>
 	
 		<tr class="ct_list_pop">
-		<td align="center" class ="getProduct1" data-prodNo="${cart.purchaseProd.prodNo}" data-amount="${cart.amount }" >
+		<td align="left" class ="getProduct1" data-prodNo="${cart.purchaseProd.prodNo}" data-amount="${cart.amount }" >
 		<c:if test="${cart.amount!=0 }">
 			${cart.purchaseProd.prodNo}
 			</c:if>
@@ -131,7 +139,7 @@ $(function() {
 			</c:if>
 			
 		</td>
-		<td></td>
+		
 		<td align="left" class ="getProduct2" data-prodNo="${cart.purchaseProd.prodNo}" data-amount="${cart.amount }" >
 			<c:if test="${cart.amount!=0 }">
 			${cart.purchaseProd.prodName}
@@ -142,9 +150,9 @@ $(function() {
 			</c:if>
 			
 		</td>
-		<td></td>
+
 		<td align="left">${cart.purchaseProd.price }</td>
-		<td></td>
+	
 			<td align="left" ><c:if test= "${cart.amount==0 }">
 			품절 상품 입니다.
 			</c:if>
@@ -152,8 +160,8 @@ $(function() {
 			${cart.amount }
 			</c:if>
 			</td>
-		<td></td>
-			<td align="left" id="delete" data-prodNo="${cart.purchaseProd.prodNo}">
+	
+			<td align="left" class="delete" data-prodNo="${cart.purchaseProd.prodNo}">
 			&#128701;
 		</td>
 		<td></td>
