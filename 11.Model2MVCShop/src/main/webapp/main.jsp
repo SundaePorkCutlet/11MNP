@@ -49,8 +49,8 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
  <input type="hidden" id="video" value=""/> <!-- 파일명 확인용 -->
 
-<video id="videoPlay" width="1500" height="600" controls autoplay>      
-    <source type="video/mp4" src="/ppp111.mp4" type="video/mp4" />      
+<video id="videoPlay" width="1100" height="600" controls autoplay loop>      
+    <source type="video/mp4" src="/images/ppp111.mp4" type="video/mp4" />      
     <source src="mov_bbb.ogg" type="video/ogg">      
     Your browser does not support HTML5 video.    
 </video>

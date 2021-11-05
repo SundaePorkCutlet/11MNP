@@ -174,6 +174,10 @@
 			
 			javascript:listcart();
 		}); 	
+		$( "a:contains('구매이력조회')" ).on("click" , function() {
+			
+			$(self.location).attr("href","/purchase/listPurchase;");
+		}); 	
 		
 		
 		

@@ -8,11 +8,40 @@
 
 <html>
 <head>
-<title>구매 목록조회</title>
 
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script type="text/javascript">
+	<meta charset="EUC-KR">
+	
+	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
+	
+	<!-- Bootstrap Dropdown Hover CSS -->
+   <link href="/css/animate.min.css" rel="stylesheet">
+   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+    <!-- Bootstrap Dropdown Hover JS -->
+   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+   
+   
+   <!-- jQuery UI toolTip 사용 CSS-->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- jQuery UI toolTip 사용 JS-->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
+	<!--  ///////////////////////// CSS ////////////////////////// -->
+	<style>
+	  body {
+            padding-top : 50px;
+        }
+    </style>
+    
+     <!--  ///////////////////////// JavaScript ////////////////////////// -->
+	<script type="text/javascript">
 	function fncGetUserList(currentPage) {
 // 		document.getElementById("currentPage").value = currentPage;
 // 		document.detailForm.submit();
@@ -73,17 +102,17 @@
 						//Debug...
 						//alert("JSONData : \n"+JSONData);
 						
-						var displayValue = "<h3>"
+						var displayValue = "<h5>"
 													+"상품번호 : "+JSONData.purchaseProd.prodNo+"<br/>"
 													+"구매자아이디 : "+JSONData.buyer.userId+"<br/>"
 													+"결제방법 : "+JSONData.paymentOption+"<br/>"
 													+"구매자이름 : "+JSONData.receiverName+"<br/>"
 													+"구매자연락처 : "+JSONData.receiverPhone+"<br/>"
 													+"구매자주소 : "+JSONData.divyAddr+"<br/>"
-													+"</h3>";
+													+"</h5>";
 						//Debug...									
 						//alert(displayValue);
-						$("h3").remove();
+						$("h5").remove();
 						
 						
 				
@@ -112,65 +141,56 @@
 	</script>
 </head>
 
-<body bgcolor="#ffffff" text="#000000">
+<body >
 
-<div style="width: 98%; margin-left: 10px;">
-
-<form name="detailForm" >
-
-<table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
-	<tr>
-		<td width="15" height="37"><img src="/images/ct_ttl_img01.gif"width="15" height="37"></td>
-		<td background="/images/ct_ttl_img02.gif" width="100%" style="padding-left: 10px;">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="93%" class="ct_ttl01">구매 목록조회</td>
-				</tr>
-			</table>
-		</td>
-		<td width="12" height="37"><img src="/images/ct_ttl_img03.gif"	width="12" height="37"></td>
-	</tr>
-</table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0"	style="margin-top: 10px;">
-	<tr>
-		<td colspan="11">전체 ${resultPage.totalCount } 건수, 현재${resultpage.currentPage } 페이지</td>
-	</tr>
-	<tr>
-		<td class="ct_list_b" width="100">No</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">회원ID</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">회원명</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b">전화번호</td>
+<jsp:include page="/layout/toolbar.jsp" />
+   	<!-- ToolBar End /////////////////////////////////////-->
+	
+	<!--  화면구성 div Start /////////////////////////////////////-->
+	<div class="container">
+	
+		<div class="page-header text-info">
+	       <h3>구매목록조회</h3>
+	    </div>
+	    
+	      <div class="row">
+	    
+		    <div class="col-md-6 text-left">
+		    	<p class="text-primary">
+		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+		    	</p>
+		  </div>
 		
-		
-		<td class="ct_line02"></td>
-		<td class="ct_list_b">배송현황</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b">정보수정</td>
-	</tr>
-	<tr>
-		<td colspan="11" bgcolor="808285" height="1"></td>
-	</tr>
+		    
+	   <table class="table table-hover table-striped" >
+      
+        <thead>
+          <tr>
+            <th align="center">No</th>
+            <th align="left" >회원ID</th>
+            <th align="left">회원명</th>
+            <th align="left">전화번호</th>
+            <th align="left">배송현황</th>
+            <th align="left">정보수정</th>
+             <th align="left">간략정보</th>
+          </tr>
+        </thead>
+       
+		<tbody> 
+	    
+	    
 	<c:set var="i" value="0" />
 	<c:forEach var="purchase" items="${list}">
 		<c:set var="i" value="${i+1}"/>
-
+	
 	<tr class="ct_list_pop">
-		<td align="center" class = "getPurchase" data-tranNo="${purchase.tranNo}">
-			${i}
-		<td></td>
-		<td align="left" class = "getUser" data-userId="${purchase.buyer.userId}">
-		${purchase.buyer.userId}
-		</td>
-		<td></td>
+		<td align="center" class="updatePurchase"  data-tranNo="${purchase.tranNo}">${i}</td>
+	    
+	    <td align="left" class = "getUser" data-userId="${purchase.buyer.userId}">${purchase.buyer.userId}</td>
+
 		<td align="left">${purchase.receiverName}</td>
-		<td></td>
 		<td align="left">${purchase.receiverPhone}</td>
-			<td></td>
-		<td align="left">현재
+	<td align="left">현재
 				
 		<c:if test = "${purchase.tranCode=='000'}">
 			
@@ -192,11 +212,16 @@
 			배송완료
 		</c:if>
 				상태 입니다.</td>
-		<td></td>
-		<c:if test = "${purchase.tranCode=='002'}">
+				
+			
+				
+				<c:if test = "${purchase.tranCode=='001'}">
+					<td align="left">입금확인중</td>
+				</c:if>
+				<c:if test = "${purchase.tranCode=='002'}">
 		
 		<td align="left" id="updateTranCode" data-TranCode="${purchase.tranCode}" data-tranNo="${purchase.tranNo}">
-		물건도착
+		<a href="#">물건도착</a>
 		</td>
 		</c:if>
 		
@@ -207,45 +232,28 @@
 			</td>
 		</c:if>
 		
-	
-		
-	</tr>
-	<tr>
-		<td colspan="11" bgcolor="D6D7D6" height="1"></td>
-		
-		
-		
-		
-		
-		
-		
-	</tr>
-	<tr>
-	<td id="${purchase.tranNo }" class="updatePurchase" data-tranNo="${purchase.tranNo }" colspan="11" bgcolor="D6D7D6" height="1">
+				<td id="${purchase.tranNo }" class = "getPurchase" data-tranNo="${purchase.tranNo }" colspan="11" bgcolor="D6D7D6" height="1">click</td>
+</tr>
+<tr>
 <!-- 	</td> -->
 	
 <%-- 	<td id="${purchase.buyer.buyerId }" class="getUser" data-tranNo="${purchase.tranNo }" colspan="11" bgcolor="D6D7D6" height="1"> --%>
 <!-- 	</td> -->
 	</tr>
-	
-	
-	</c:forEach>
-</table>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 10px;">
-	<tr>
-		<td align="center"></td>
-		<td>
-		   <input type="hidden" id="currentPage" name="currentPage" value=""/>
+</c:forEach>
+</tbody>
+</table>
+    </div>
+
+
+
+		<div align="center">
 		<jsp:include page="../common/pageNavigator.jsp"/>
 	
-		</td>
-		
-	</tr>
-</table>
+</div>		
 
-<!--  페이지 Navigator 끝 -->
-</form>
+
 
 </div>
 
