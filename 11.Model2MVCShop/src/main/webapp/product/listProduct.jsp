@@ -47,6 +47,7 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
    <!-- jQuery UI toolTip 사용 CSS-->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- jQuery UI toolTip 사용 JS-->
+     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
@@ -64,6 +65,71 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 // 	document.getElementById("currentPage").value = currentPage;
 //    	document.detailForm.submit();		
 // }
+
+
+$(document).ready(function() {
+	
+	
+ $("#searchKeyword2").autocomplete(
+		
+		 
+		 {
+ source : function(request, response) {
+	
+ $.ajax({
+	 
+ url : "/product/json/autoComplete",
+ type : "get",
+ dataType : "json",
+ data: request,
+
+ success : function(data) {
+ 
+ var result = data;
+ response(result);
+ },
+ 
+ error : function(data) {
+ alert("에러가 발생하였습니다.")
+ }
+ });
+ }
+ });
+});
+
+$(function() {
+	
+    $('#searchKeyword').autocomplete({
+     
+        source : function(request, response) {
+            $.ajax({
+                type : 'get',
+                url: '/product/json/autoComplete?searchKeyword='+$(this).text() ,
+                dataType : 'json',
+                success : function(data) {
+               
+                    // 서버에서 json 데이터 response 후 목록 추가
+                    response(
+                        $.map(data, function(item) {
+                            return {
+                                label : item + 'label',
+                                value : item,
+                                test : item + 'test'
+                            }
+                        })
+                    );
+                }
+            });
+        }
+    }).autocomplete('instance')._renderItem = function(ul, item) { // UI 변경 부
+        return $('<li>') //기본 tag가 li
+        .append('<div>' + item.value + '<br>' + item.label + '</div>') // 원하는 모양의 HTML 만들면 됨
+        .appendTo(ul);
+    };
+});
+
+
+
 	function fncGetUserList(currentPage) {
 			//document.getElementById("currentPage").value = currentPage;
 			$("#currentPage").val(currentPage)
@@ -199,9 +265,9 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 			</select>
 		</div>
 		
-		<div class="form-group">
+		<div class="form-group" data-keyword="${search.searchKeyword}">
 		 <label class="sr-only" for="searchKeyword">검색어</label>
-				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : ""}"   class="ct_input_g" style="width:200px; height:19px" >
+				    <input type="text" class="form-control" data-keyword="${search.searchKeyword}" id="searchKeyword" name="searchKeyword"  placeholder="검색어" value="${! empty search.searchKeyword ? search.searchKeyword : ""}"   class="ct_input_g" style="width:200px; height:19px" >
 		</div>
 		
 				  <button type="button" class="btn btn-default">검색</button>

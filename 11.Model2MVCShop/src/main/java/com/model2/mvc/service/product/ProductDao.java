@@ -20,6 +20,8 @@ public interface ProductDao {
 	public int getTotalCount(Search search) throws Exception;
 	
 	public int getTotalManageCount(Search search) throws Exception;
+	
+	public List<Product> getAutoComplete() throws Exception;
 
 
 }

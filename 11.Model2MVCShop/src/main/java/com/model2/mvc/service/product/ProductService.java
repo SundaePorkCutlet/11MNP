@@ -1,5 +1,6 @@
 package com.model2.mvc.service.product;
 
+import java.util.List;
 import java.util.Map;
 
 import com.model2.mvc.common.Search;
@@ -16,6 +17,8 @@ public interface ProductService {
 	public Map<String, Object> getProductManageList(Search search) throws Exception;
 
 	public void updateProduct(Product product) throws Exception;
+	
+	public List<Product> getAutoComplete() throws Exception;
 
 
 }

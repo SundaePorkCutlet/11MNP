@@ -169,7 +169,12 @@
 							</where>
 						</if> ) countTable						
 	 </select>
-		
+	 
+		 <select id="getautoComplete" resultMap="productSelectMap">
+		 SELECT prod_Name,prod_No,price
+		 FROM PRODUCT
+		 
+		 </select>
 		
 		
 		

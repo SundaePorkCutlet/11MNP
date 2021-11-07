@@ -65,5 +65,10 @@ public class ProductDaoImpl implements ProductDao{
 		
 	}
 	
+	@Override
+	public List<Product> getAutoComplete() throws Exception {
+		return sqlSession.selectList("ProductMapper.getautoComplete");
+	}
+	
 	
 }
