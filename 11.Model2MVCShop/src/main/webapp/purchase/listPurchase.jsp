@@ -132,7 +132,7 @@
 	$(".updatePurchase").on("click" , function() {
 		
 		
-		 self.location ="/purchase/updatePurchase?tranNo="+$(this).attr("data-tranNo");
+		 self.location ="/purchase/getPurchase?tranNo="+$(this).attr("data-tranNo");
 	});
 	
 	});	

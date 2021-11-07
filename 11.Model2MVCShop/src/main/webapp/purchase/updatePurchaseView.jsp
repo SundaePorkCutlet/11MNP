@@ -137,7 +137,7 @@ $(function() {
 		   <div class="form-group">
 		    <label for="receiverRequest"  class="col-sm-offset-1 col-sm-3 control-label">구매요청사항</label>
 		    <div class="col-sm-4">
-		      <input type="text" name="receiverRequest" value="${divyRequest }" class="form-control"   />
+		      <input type="text" name="receiverRequest" value="${purchase.divyRequest }" class="form-control"   />
 				
 		    </div>
 		  </div>

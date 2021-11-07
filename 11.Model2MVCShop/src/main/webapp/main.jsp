@@ -45,18 +45,23 @@
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  아래의 내용은 http://getbootstrap.com/getting-started/  참조 -->	
-   	<div class="container ">
+   	<div class="container">
       <!-- Main jumbotron for a primary marketing message or call to action -->
  <input type="hidden" id="video" value=""/> <!-- 파일명 확인용 -->
 
-<video id="videoPlay" width="1100" height="600" controls autoplay loop>      
+<video id="videoPlay" width="1200" height="600" controls autoplay loop >      
     <source type="video/mp4" src="/images/ppp111.mp4" type="video/mp4" />      
     <source src="mov_bbb.ogg" type="video/ogg">      
     Your browser does not support HTML5 video.    
 </video>
 </div>
 
+		<script>
+	 	var video = document.getElementById("videoPlay");
 
+	 	
+	 	video.volume = 0.2;
+	 	</script>
           
 	<!-- 참조 : http://getbootstrap.com/css/   : container part..... -->
 	<div class="container">
