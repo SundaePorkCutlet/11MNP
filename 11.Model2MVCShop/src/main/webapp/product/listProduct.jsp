@@ -67,35 +67,6 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 // }
 
 
-$(document).ready(function() {
-	
-	
- $("#searchKeyword2").autocomplete(
-		
-		 
-		 {
- source : function(request, response) {
-	
- $.ajax({
-	 
- url : "/product/json/autoComplete",
- type : "get",
- dataType : "json",
- data: request,
-
- success : function(data) {
- 
- var result = data;
- response(result);
- },
- 
- error : function(data) {
- alert("에러가 발생하였습니다.")
- }
- });
- }
- });
-});
 
 $(function() {
 	
@@ -103,27 +74,36 @@ $(function() {
      
         source : function(request, response) {
             $.ajax({
-                type : 'get',
-                url: '/product/json/autoComplete?searchKeyword='+$(this).text() ,
+                type : 'post',
+                url: '/product/json/autoComplete' ,
                 dataType : 'json',
                 success : function(data) {
                
-                    // 서버에서 json 데이터 response 후 목록 추가
-                    response(
-                        $.map(data, function(item) {
-                            return {
-                                label : item + 'label',
-                                value : item,
-                                test : item + 'test'
-                            }
-                        })
-                    );
+//                     // 서버에서 JSON 데이터 RESPONSE 후 목록 추가
+//                     RESPONSE(
+//                         $.MAP(DATA, FUNCTION(ITEM) {
+//                             RETURN {
+                               
+//                                 VALUE : ITEM
+                               
+//                             }
+//                         })
+//                     );
+                	var final_data =( $.map( data, function( item ) {
+						return {
+							value : item
+						}
+					}));
+					response($.ui.autocomplete.filter(final_data, $("#searchKeyword").val()));
+
+
                 }
             });
         }
-    }).autocomplete('instance')._renderItem = function(ul, item) { // UI 변경 부
+    })
+    .autocomplete('instance')._renderItem = function(ul, item) { // UI 변경 부
         return $('<li>') //기본 tag가 li
-        .append('<div>' + item.value + '<br>' + item.label + '</div>') // 원하는 모양의 HTML 만들면 됨
+        .append('<div>' + item.value + '<br> </div>') // 원하는 모양의 HTML 만들면 됨
         .appendTo(ul);
     };
 });

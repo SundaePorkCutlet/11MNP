@@ -131,11 +131,11 @@ public class ProductRestController {
 	}
 	
 	
-	@RequestMapping(value = "/json/autoComplete", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	@RequestMapping(value = "/json/autoComplete", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	public String json( Locale locale, Model model , HttpServletRequest request, HttpServletResponse resp) throws Exception {    
 
 		System.out.println("autoComplete ¡¯¿‘");
-	
+		System.out.println("te"+request.getParameter("searchKeyword"));
 	
 		
 		List<Product> list=productService.getAutoComplete();
