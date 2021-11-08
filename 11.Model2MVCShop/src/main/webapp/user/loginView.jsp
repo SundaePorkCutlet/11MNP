@@ -114,6 +114,8 @@
 					    <div class="col-sm-offset-4 col-sm-6 text-center">
 					      <button type="button" class="btn btn-primary"  >로 &nbsp;그 &nbsp;인</button>
 					      <a class="btn btn-primary btn" href="#" role="button">회 &nbsp;원 &nbsp;가 &nbsp;입</a>
+					 <hr/>
+					   <jsp:include page="/kakao_login.jsp" />
 					    </div>
 					  </div>
 			
