@@ -68,6 +68,17 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 
 
 
+var page = 1;
+
+$(window).scroll(function() {
+    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+      console.log(++page);
+      $("#enters").append("<h1>Page " + page + "</h1><BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~");
+      
+    }
+});
+
+
 $(function() {
 	
     $('#searchKeyword').autocomplete({
@@ -132,15 +143,15 @@ $(function() {
 		 
 
 	 
-		$( ".ct_list_pop td:nth-child(6)" ).on("click" , function() {
+		$( "a[href='##' ]" ).on("click" , function() {
 			//Debug..
 // 			alert(  $( this ).text().trim() );
 
 			// 			if($(this).attr("id")=='amount'){
 // 			self.location ="/product/getProduct?prodNo="+$(this).attr("data-prodNo")}
-
+			
 			var prodNo = $(this).attr("data-prodNo");
-		
+			
 			$.ajax( 
 					{
 						url : "/product/json/getProduct/"+prodNo ,
@@ -180,10 +191,12 @@ $(function() {
 			
 		});
 			
-			$(".ct_list_pop td:nth-child(2)").on("click" , function() {
+			$("a[href='###' ]").on("click" , function() {
 				
-				if($(this).attr("id")=='amount'){
+				if($(this).attr("data-amount")!=0){
 				self.location="/product/getProduct?prodNo="+$(this).attr("data-prodNo");}
+				if($(this).attr("data-amount")==0){
+					alert('품절된 상품입니다.');}
 			});
 			
 			
@@ -259,75 +272,111 @@ $(function() {
 			</div>
 			</div>
 
-<table class="table table-hover table-striped" >
+<!-- <table class="table table-hover table-striped" > -->
       
-        <thead>
-          <tr>
-            <th align="center">No</th>
-            <th align="left" >상품명</th>
-            <th align="left">가격</th>
-            <th align="left">등록일</th>
-            <th align="left">수량</th>
-            <th align="left">간략정보</th>
-          </tr>
-        </thead>
+    
+      
+      
+      
+      
+<!--         <thead> -->
+<!--           <tr> -->
+<!--             <th align="center">No</th> -->
+<!--             <th align="left" >상품명</th> -->
+<!--             <th align="left">가격</th> -->
+<!--             <th align="left">등록일</th> -->
+<!--             <th align="left">수량</th> -->
+<!--             <th align="left">간략정보</th> -->
+<!--           </tr> -->
+<!--         </thead> -->
        
-		<tbody>
+<!-- 		<tbody> -->
+
 
 	
+   
 	
-	
+	<div class="container pt-1">
 	<c:set var="i" value="0" />
 	<c:forEach var="product" items="${list}">
 		<c:set var="i" value="${i+1}"/>
-	
-	<tr class="ct_list_pop">
-		<td align="center">${i}</td>
-
-				<c:if test="${product.amount!=0 }">
-				<td id ="amount" data-prodNo="${product.prodNo }" align="left">
-				
-				${product.prodName }
-				</td>
-				</c:if>
-				<c:if test="${product.amount==0 }">
-				<td id ="zeroamount" >
-				<span style="color:blue">
-				${product.prodName }
-				</span>
-				</td>
-				</c:if>
-				
+	 
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+    
+      <img src="/images/uploadFiles/${product.fileName }" width="160" height="90" alt="...">
+      <div class="caption">
+  
+  <h3>${product.prodName }</h3>
+  <p>가격 : ${product.price }</p>
+  <p>수량 : 		<c:if test="${product.amount!=0 }"> 
+ 		<td align="left">${product.amount }</td> 
 		
-		
-		<td align="left">${product.price }</td>
-
-		<td align="left">${product.regDate }</td>
-	
-		<c:if test="${product.amount!=0 }">
-		<td align="left">${product.amount }</td>
-		
-		</c:if>
-		<c:if test="${product.amount==0 }">
-		<td align="left">품절된 상품입니다.</td>
-
-		
-		</c:if>
-		 <td align="left" data-prodNo="${product.prodNo }" data-amount="${product.amount }">
-		<i id="${product.prodNo}" class = "addPuchase"  colspan="11" bgcolor="D6D7D6" height="1">click!</i>
+ 		</c:if> 
+ 		<c:if test="${product.amount==0 }"> 
+ 		<td align="left" >품절된 상품입니다.</td> 
+ 		</c:if></p>
+   <p><a href="###" class="btn btn-primary" role="button" data-prodNo="${product.prodNo }" data-amount="${product.amount}">상품보기</a> <a href="##" class="btn btn-second" role="button" data-prodNo="${product.prodNo }" >간략정보</a></p>
+   <tr>
+   <td align="left" class="information" data-prodNo="${product.prodNo }" data-amount="${product.amount }">
+		<i id="${product.prodNo}" class = "addPuchase"  colspan="11" bgcolor="D6D7D6" height="1"></i>
 		<input type="hidden" value="${product.prodNo}">
-	</td>
-	</tr>
-	</c:forEach>
-	</tbody>
-</table>
-
+		</td>
+		</tr>
 </div>
+</div>
+</div>
+
+
+	
+	
+	
+<!-- 	<tr class="ct_list_pop"> -->
+<%-- 		<td align="center">${i}</td> --%>
+
+<%-- 				<c:if test="${product.amount!=0 }"> --%>
+<%-- 				<td id ="amount" data-prodNo="${product.prodNo }" align="left"> --%>
+				
+<%-- 				${product.prodName } --%>
+<!-- 				</td> -->
+<%-- 				</c:if> --%>
+<%-- 				<c:if test="${product.amount==0 }"> --%>
+<!-- 				<td id ="zeroamount" > -->
+<!-- 				<span style="color:blue"> -->
+<%-- 				${product.prodName } --%>
+<!-- 				</span> -->
+<!-- 				</td> -->
+<%-- 				</c:if> --%>
+				
+		
+		
+<%-- 		<td align="left">${product.price }</td> --%>
+
+<%-- 		<td align="left">${product.regDate }</td> --%>
+	
+<%-- 		<c:if test="${product.amount!=0 }"> --%>
+<%-- 		<td align="left">${product.amount }</td> --%>
+		
+<%-- 		</c:if> --%>
+<%-- 		<c:if test="${product.amount==0 }"> --%>
+<!-- 		<td align="left">품절된 상품입니다.</td> -->
+
+		
+<%-- 		</c:if> --%>
+		 
+<!-- 	</td> -->
+<!-- 	</tr> -->
+	</c:forEach>
+<!-- 	</tbody> -->
+<!-- </table> -->
+</div>
+</div>
+
+
 			<div align = "center">
 			<jsp:include  page="../common/pageNavigator.jsp"/>	
 			</div>
 <!--  페이지 Navigator 끝 -->
-
 
 
 
