@@ -115,6 +115,7 @@ $(function() {
         <thead>
           <tr>
             <th align="center">No</th>
+            <th align="center">이미지</th>
             <th align="center" >상품명</th>
             <th align="left">가격</th>
             <th align="left">남은수량</th>
@@ -138,6 +139,12 @@ $(function() {
 			${cart.purchaseProd.prodNo}
 			</c:if>
 			
+		</td>
+		
+		<td align="left">
+		
+		<img 	src="/images/uploadFiles/${cart.purchaseProd.fileName }" width="140" height="105">
+		
 		</td>
 		
 		<td align="left" class ="getProduct2" data-prodNo="${cart.purchaseProd.prodNo}" data-amount="${cart.amount }" >

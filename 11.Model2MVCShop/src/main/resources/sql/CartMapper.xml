@@ -10,6 +10,7 @@
 		<result property="purchaseProd.prodNo" 				column="PROD_NO" 		jdbcType="INTEGER"/>
 		<result property="purchaseProd.prodName" 	column="PROD_NAME" 		jdbcType="VARCHAR"/>
 		<result property="purchaseProd.price" 				column="PRICE" 		jdbcType="INTEGER"/>
+		<result property="purchaseProd.fileName" 	column="FILE_NAME" 		jdbcType="VARCHAR"/>
   		<result property="buyer.userId" 	column="BUYER_ID" 		jdbcType="VARCHAR"/>
   		<result property="amount" 	column="AM" 		jdbcType="NUMERIC"/>
 		
@@ -18,12 +19,13 @@
   	
 	<insert id="addCart" parameterType="Cart">
 		INSERT 
-		INTO Cart(prod_no,prod_name,price,buyer_id)
+		INTO Cart(prod_no,prod_name,price,file_name,buyer_id)
 		VALUES (
 					
 					#{purchaseProd.prodNo:INTEGER},
 					#{purchaseProd.prodName:VARCHAR},
 					#{purchaseProd.price:INTEGER},
+					#{purchaseProd.fileName:VARCHAR},
 					#{buyer.userId:VARCHAR}
 					 )
 	</insert>

@@ -35,7 +35,7 @@ function kakaoLogin(){
 	                dataType : 'json',
 	                success : function(data) {
 	                	console.log("success");
-	              window.location.href="http://localhost:8090/index.jsp";
+	              window.location.href="http://127.0.0.1:8090/index.jsp";
 					}
 				});
 				
