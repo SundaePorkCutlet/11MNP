@@ -17,22 +17,32 @@ window.Kakao.init("3d4ef7f8d4596e30f984701a9b6dfa51");
 function kakaoLogin(){
 	window.Kakao.Auth.login({
 		
-		scope:'profile_nickname, gender, birthday',
+		scope:'account_email,profile_nickname, gender, birthday',
 		success : function(authObj){
 			console.log(authObj);
 			window.Kakao.API.request({
 				url:'/v2/user/me',
-				success: res => {
-					const kakao_account = res.kakao_accout;
-					console.log(kakao_account);
-					
-				}
+				success: function (response) {
+					console.log(response.kakao_account);
+                    let email = response.kakao_account.email;
+                    let birthday = response.kakao_account.birthday;
+             		let name = response.kakao_account.profile.nickname;
+					console.log(name);
+					$.ajax({
+	                type : 'post',
+	                data : {"email":email , "birthday":birthday , "name":name},
+	                url: '/user/kakaoLogin' ,
+	                dataType : 'json',
+	                success : function(data) {
+	                	console.log("success");
+	              window.location.href="http://localhost:8090/index.jsp";
+					}
+				});
 				
-			}); 
-			
+				}
+			});
 		}
 	});
-	
 }
 </script>
 </body>

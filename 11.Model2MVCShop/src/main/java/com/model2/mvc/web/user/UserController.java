@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
@@ -172,5 +174,50 @@ public class UserController {
 		model.addAttribute("search", search);
 		
 		return "forward:/user/listUser.jsp";
+	}
+	
+	
+	
+	@ResponseBody
+	@PostMapping( value="kakaoLogin" )
+	public User kakaoLogin(@RequestParam("email")String account_email,
+			@RequestParam("birthday")String birthday,
+			@RequestParam("name")String name
+			, HttpSession session ) throws Exception{
+		
+		System.out.println("/user/kakaoLogin : POST");
+		System.out.println(birthday);
+		System.out.println(account_email);
+		//Business Logic
+		String[] userEmail = account_email.split("@");
+		String userId = userEmail[0]+"e1f6s23";
+		String password = birthday+"1537";
+		
+		System.out.println(userId);
+		User dbUser=userService.getUser(userId);
+		
+		if(dbUser ==null) {
+		System.out.println("널일때");
+			
+			User user = new User();
+			user.setUserId(userId);
+			user.setPassword(password);
+			user.setUserName(name);
+			userService.addUser(user);
+			session.setAttribute("user", user);
+			
+			return user;
+		}else{
+				System.out.println("널아닐때");
+			
+				session.setAttribute("user", dbUser);
+	
+				return dbUser;
+			
+		}
+		
+		
+		
+	
 	}
 }

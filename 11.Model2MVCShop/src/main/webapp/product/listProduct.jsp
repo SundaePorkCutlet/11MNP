@@ -49,6 +49,7 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
   <!-- jQuery UI toolTip »ç¿ë JS-->
      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="./jquery.jscroll.js"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -68,15 +69,10 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 
 
 
-var page = 1;
 
-$(window).scroll(function() {
-    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-      console.log(++page);
-      $("#enters").append("<h1>Page " + page + "</h1><BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~");
-      
-    }
-});
+
+
+
 
 
 $(function() {
