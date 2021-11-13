@@ -88,7 +88,7 @@
 	             <li><a></a></li>
 	              <li><a></a></li>
 	             
-	             	<li><a style="color:white">아이디 : ${user.userId }</a></li>
+	             	<li><a style="color:white">아이디 : ${sessionScope.user.userId }</a></li>
     <li><a style="color:white">  포인트 : <fmt:formatNumber value="${user.point }" pattern="#,###" /></a></li>
 	             <li><a href = "#" style="font-size:13px;color:white" >&#128092; 장바구니</a> </li>
 	             </ul>

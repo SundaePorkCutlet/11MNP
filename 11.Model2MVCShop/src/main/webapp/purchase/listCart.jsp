@@ -81,6 +81,70 @@ $(function() {
 	 
 });
 
+$(function() {
+	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
+	 $( "button.btn.btn-primary" ).on("click" , function() {
+		//Debug..
+		//alert(  $( "td.ct_btn01:contains('가입')" ).html() );
+		alert('들려')
+		
+		var chek_arr = [];
+		$("input[name=cartCheck]:checked").each(function(){
+		var chek = $(this).val();
+		chek_arr.push(chek);
+})
+		console.log(chek_arr);
+		opener.parent.location="/purchase/allPurchase?chekarray="+chek_arr;
+		// window.close();
+	});
+});	
+
+function Chk() {
+
+	var result = Array();
+
+	var cnt = 0;
+
+	var chkbox = $(".checkedcart");
+
+	for(i=0;i<chkbox.length;i++) {
+
+		if(chkbox[i].checked == true) {
+
+			result[cnt] = chkbox[i].value;
+
+			cnt++;
+
+		}
+
+	}
+
+	$('#result').val(result);
+
+}
+
+function CheckAll() {
+
+	var chkbox = $(".checkedcart");
+
+	var chkall = document.getElementById('checkedAllCart');
+
+	for(i=0;i<chkbox.length;i++) {
+
+		chkbox[i].checked = chkall.checked;
+
+	}
+
+	Chk();
+
+}
+
+
+
+
+
+
 </script>
 </head>
 
@@ -115,6 +179,7 @@ $(function() {
         <thead>
           <tr>
             <th align="center">No</th>
+            <th align="center"><input type="checkbox" id="checkedAllCart" name="cartAllCheck"  checked="checked"  onclick='CheckAll();'>
             <th align="center">이미지</th>
             <th align="center" >상품명</th>
             <th align="left">가격</th>
@@ -139,6 +204,10 @@ $(function() {
 			${cart.purchaseProd.prodNo}
 			</c:if>
 			
+		</td>
+		
+		<td>
+		<input type="checkbox" class="checkedcart" name="cartCheck" value="${cart.purchaseProd.prodNo}" checked="checked"  onclick='Chk();'>
 		</td>
 		
 		<td align="left">
@@ -184,8 +253,9 @@ $(function() {
 
 
 		<div align="center">
-		<jsp:include page="../common/pageNavigator.jsp"/>
 	
+	
+		  <button type="button" class="btn btn-primary"  >구 &nbsp;매</button>
 		</div>
 
 <!--  페이지 Navigator 끝 -->

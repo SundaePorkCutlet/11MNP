@@ -1,5 +1,7 @@
 package com.model2.mvc.web.purchase;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -320,7 +322,7 @@ public class PurchaseController {
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
-		search.setPageSize(pageSize);
+		search.setPageSize(100);
 		
 		
 		System.out.println("search"+search);
@@ -414,4 +416,49 @@ public class PurchaseController {
 	
 		
 	}
+	
+	@RequestMapping(value="allPurchase",method=RequestMethod.GET)
+	public String allPurchase( @RequestParam("chekarray")String[] prodNo,
+								
+								HttpServletRequest request,
+									Model model) throws Exception {
+
+	
+		System.out.println("allpurchase µé·È´Ù~");
+		System.out.println(prodNo[0]);
+		System.out.println(prodNo[1]);
+		
+		model.addAttribute("prodNo",prodNo);
+		
+		
+		return "redirect:/purchase/allOrder";
+	}
+	
+	@RequestMapping(value="allOrder",method=RequestMethod.GET)
+	public String allOrder( @RequestParam("prodNo")String[] prodNo,
+								
+								HttpServletRequest request,
+									Model model) throws Exception {
+		
+		List<Product> list = new ArrayList();
+	
+		System.out.println("allOrder µé·È´Ù~");
+		
+		for(int i =0 ; i<prodNo.length ; i++ ) {
+		
+			System.out.println(prodNo[i]);
+		list.add(productService.getProduct(Integer.parseInt(prodNo[i])));
+	}
+		
+		System.out.println(list);
+		model.addAttribute("list", list);
+		
+		return "forward:/purchase/AllPurchase.jsp";
+	}
+	
+	
+	
+	
+	
+	
 }

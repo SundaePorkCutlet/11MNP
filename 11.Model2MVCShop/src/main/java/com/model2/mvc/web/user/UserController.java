@@ -189,8 +189,8 @@ public class UserController {
 		System.out.println(birthday);
 		System.out.println(account_email);
 		//Business Logic
-		String[] userEmail = account_email.split("@");
-		String userId = userEmail[0]+"e1f6s23";
+	
+		String userId = account_email;
 		String password = birthday+"1537";
 		
 		System.out.println(userId);
@@ -204,12 +204,12 @@ public class UserController {
 			user.setPassword(password);
 			user.setUserName(name);
 			userService.addUser(user);
-			session.setAttribute("user", user);
+			User user2 = userService.getUser(userId);
+			session.setAttribute("user", user2);
 			
 			return user;
 		}else{
 				System.out.println("³Î¾Æ´Ò¶§");
-			
 				session.setAttribute("user", dbUser);
 	
 				return dbUser;
