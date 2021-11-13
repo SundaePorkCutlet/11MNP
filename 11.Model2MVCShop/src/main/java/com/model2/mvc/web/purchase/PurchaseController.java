@@ -456,6 +456,78 @@ public class PurchaseController {
 		return "forward:/purchase/AllPurchase.jsp";
 	}
 	
+	@RequestMapping(value="addAllPurchase",method=RequestMethod.GET)
+	public String addAllPurchase(	@ModelAttribute("purchase") Purchase purchase ,
+									@RequestParam("receiverAddr") String Addr,
+									@RequestParam("receiverRequest") String Request,
+									@RequestParam("receiverDate") String Date,
+							
+									@RequestParam("prodNo")String[] prodNo,
+								
+								
+								HttpServletRequest request,
+									Model model) throws Exception {
+
+		System.out.println("/addPurchase : POST");
+		System.out.println(purchase.getReceiverName());
+		int amount = 1;
+		 
+		for(int i =0; i<prodNo.length;i++) {
+		Product product = productService.getProduct(Integer.parseInt(prodNo[i]));
+		
+		int totalamount = (product.getAmount() - amount);
+		System.out.println("aaaaa"+totalamount);
+		System.out.println("bbbbb"+amount);
+		
+		
+		
+		
+		User user = (User)request.getSession(true).getAttribute("user");
+		int remainPoint = user.getPoint()-product.getPrice()*amount;
+		
+		System.out.println(remainPoint);
+		System.out.println("구매방법"+purchase.getPaymentOption());
+		if(purchase.getPaymentOption().equals("3")) {
+		if(remainPoint>0) {
+			System.out.println("포인트구매 진입");
+			product.setAmount(totalamount);
+			productService.updateProduct(product);
+			user.setPoint(remainPoint);
+			purchase.setPurchaseProd(product);
+			purchase.setBuyer((User)(request.getSession(true).getAttribute("user")));
+			purchase.setDivyAddr(Addr);
+			purchase.setDivyRequest(Request);
+			purchase.setDivyDate(Date);
+			purchase.setTranCode("001");
+			purchase.setPurchaseAmount(amount);
+			purchaseService.addPurchase(purchase);
+			userService.updatePoint(user);
+			
+		}
+		}else {
+			product.setAmount(totalamount);
+			productService.updateProduct(product);
+			purchase.setPurchaseProd(product);
+			purchase.setBuyer((User)(request.getSession(true).getAttribute("user")));
+			purchase.setDivyAddr(Addr);
+			purchase.setDivyRequest(Request);
+			purchase.setDivyDate(Date);
+			purchase.setTranCode("001");
+			purchase.setPurchaseAmount(amount);
+			purchaseService.addPurchase(purchase);
+		}
+		}
+	
+		model.addAttribute("amount",amount);
+//		model.addAttribute("Buyer",request.getSession(true).getAttribute("user"));
+		
+		
+		
+		
+		return "forward:/purchase/addPurchase.jsp";
+	}
+	
+	
 	
 	
 	

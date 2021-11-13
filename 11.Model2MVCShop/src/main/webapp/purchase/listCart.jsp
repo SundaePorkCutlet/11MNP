@@ -87,16 +87,22 @@ $(function() {
 	 $( "button.btn.btn-primary" ).on("click" , function() {
 		//Debug..
 		//alert(  $( "td.ct_btn01:contains('가입')" ).html() );
-		alert('들려')
+		
 		
 		var chek_arr = [];
 		$("input[name=cartCheck]:checked").each(function(){
 		var chek = $(this).val();
 		chek_arr.push(chek);
-})
+})		
+		if(chek_arr==0){
+			alert('선택한 상품이 없습니다!')
+			
+		}
+		if(chek_arr!=0){
 		console.log(chek_arr);
 		opener.parent.location="/purchase/allPurchase?chekarray="+chek_arr;
-		// window.close();
+		window.close();
+		 }
 	});
 });	
 
@@ -207,7 +213,13 @@ function CheckAll() {
 		</td>
 		
 		<td>
+		<c:if test="${cart.amount!=0 }">
 		<input type="checkbox" class="checkedcart" name="cartCheck" value="${cart.purchaseProd.prodNo}" checked="checked"  onclick='Chk();'>
+		</c:if>
+		<c:if test="${cart.amount==0 }">
+			품절
+		</c:if>
+		
 		</td>
 		
 		<td align="left">
