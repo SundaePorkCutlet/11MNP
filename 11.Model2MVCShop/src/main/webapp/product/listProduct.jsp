@@ -49,7 +49,7 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
   <!-- jQuery UI toolTip 사용 JS-->
      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="./jquery.jscroll.js"></script>
+<!-- 	<script src="./jquery.jscroll.js"></script> -->
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -69,11 +69,94 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 
 
 
+	var page = 1; // ajax로 날려 back단에서 select시 limit옵션을 걸기 위해
+	var temp = false; // 데이터가 없을때 계속적으로 ajax호출이 되는것을 방지하기 위해
+	var type = "type1"; // ajax로 날려 back단에서 확인할 type
+
+// 	$(document).ready(function(){
+// 		$(window).scroll(function(){ // 스크롤의 변화를 감지
+// 			var scrollT = $(this).scrollTop(); // 스크롤바의 상단위치
+// 			var scrollH = $(this).height(); // 해당 div의 높이
+// 			var contentH = $("body").height(); // 문서 전체의 내용을 갖는 div의 높이
+// 			console.log(contentH)
+// 			let temp1 = false;
+// 			if(scrollT + scrollH+1  >= contentH && !temp1) { // 스크롤이 아래쪽에 위치할때 
+// 				page++; 
+// 				console.log('닿음');
+// 				temp1 = true;
+// 				setTimeout(() => select_list(), 1000);
+					
+				
+				
+				
+// 			}
+// 		});
+// 	});
+	$(document).ready(function(){
+		if(window.scrollY==0){
+			console.log("바닥");
+            ++page; 
+            select_list();
+		}
+		
+	});
+	
+	$(window).scroll(function () {
+	
+		
+		console.log(window.innerHeight+'+'+window.scrollY);
+		console.log('win'+document.body.offsetHeight);
+		if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            console.log("바닥");
+            ++page; 
+            select_list();
+        }
+    });
 
 
+	function select_list() {
+	$.ajax( 
 
-
-
+		{
+			url : "/product/json/listProduct",
+			type : 'post',
+			data:JSON.stringify({"currentPage":page}),
+			dataType : "JSON" ,
+			contentType: "application/json; charset=utf-8",
+			success : function(data){
+			
+				if(data.list.length > 0 ){
+					$.each(data.list, function (idx, val){
+					console.log("닿았다")
+					var html = '<div class="col-sm-6 col-md-3"><div class="thumbnail">  <img src="/images/uploadFiles/'+val.fileName+'" width="160" height="90" alt="..."> <div class="caption">'
+					html+='<h3>'+val.prodName+'</h3>'
+					html+='<p>가격 : '+val.price+'</p>'
+					if(val.amount!=0 ){
+					html+='<p>수량 : 	<td align="left">'+val.amount+'</td>'}
+			 		if(val.amount==0){ 
+			 		html+='<p>수량 : 	<td align="left" >품절된 상품입니다.</td>'}
+			 		html+='</p>'
+			 		html+='<p><a href="###" class="btn btn-primary" role="button" data-prodNo="'+val.prodNo+'" data-amount="'+val.amount+'">상품보기</a> <a href="##" class="btn btn-second" role="button" data-prodNo="'+val.prodNo+'" >간략정보</a></p>'
+			 		html+=' <tr><td align="left" class="information" data-prodNo="'+val.prodNo+'" data-amount="'+val.amount+'">'
+			 		html+='<i id="'+val.prodNo+'" class = "addPuchase"  colspan="11" bgcolor="D6D7D6" height="1"></i>'
+			 		html+='<input type="hidden" value="'+val.prodNo+'"></td></tr>'
+			 		
+			 		html+='</div></div></div>';
+                    // 해당하는 만큼 li를 만들어서 #list 뒤에 붙임
+// 					$(".container pt-1").append(data.list);
+				
+					$(".container.pt-1").append(html);
+					});
+					
+				}else{
+				console.log("실패")
+                	// 더이상 조회할 데이터가 없을 시 temp를 true로 만들어 더이상의 ajax호출을 막음.
+					temp = true;
+				}
+			}
+			,error: function(xhr, status, error) { alert(error); }
+		});
+	}
 
 $(function() {
 	
@@ -139,7 +222,7 @@ $(function() {
 		 
 
 	 
-		$( "a[href='##' ]" ).on("click" , function() {
+		$(document).on("click" ,"a[href='##' ]", function() {
 			//Debug..
 // 			alert(  $( this ).text().trim() );
 
@@ -187,7 +270,7 @@ $(function() {
 			
 		});
 			
-			$("a[href='###' ]").on("click" , function() {
+			$(document).on("click" ,"a[href='###' ]", function() {
 				
 				if($(this).attr("data-amount")!=0){
 				self.location="/product/getProduct?prodNo="+$(this).attr("data-prodNo");}
@@ -231,7 +314,7 @@ $(function() {
 	    
 		    <div class="col-md-6 text-left">
 		    	<p class="text-primary">
-		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+		    		전체  ${resultPage.totalCount } 건수
 		    	</p>
 		    </div>
 			 <div class="col-md-12 text-right">
@@ -369,9 +452,9 @@ $(function() {
 </div>
 
 
-			<div align = "center">
-			<jsp:include  page="../common/pageNavigator.jsp"/>	
-			</div>
+<!-- 			<div align = "center"> -->
+<%-- 			<jsp:include  page="../common/pageNavigator.jsp"/>	 --%>
+<!-- 			</div> -->
 <!--  페이지 Navigator 끝 -->
 
 

@@ -85,7 +85,7 @@ public class ProductController {
 		System.out.println("======================================================================");
 		
 			
-			String temDir = "C:\\workspace_hjh"; 
+			String temDir = "/images/uploadFiles/"; 
 		
 				
 			
@@ -276,7 +276,7 @@ public class ProductController {
 	@RequestMapping(value="listProduct")
 	public String listProduct( @ModelAttribute("search") Search search , Model model , HttpServletRequest request ) throws Exception{
 		
-		System.out.println("/listProduct");
+		System.out.println("/listProduct+1");
 		
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
