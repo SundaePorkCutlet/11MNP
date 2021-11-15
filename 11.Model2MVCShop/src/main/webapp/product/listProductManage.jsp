@@ -129,7 +129,7 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 														+"</h6>";
 							//Debug...									
 							//alert(displayValue);
-							$("h3").remove();
+							$("h6").remove();
 							
 							
 						if(JSONData.amount!=0){

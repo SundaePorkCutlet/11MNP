@@ -115,12 +115,17 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 
 
 	function select_list() {
+		console.log($("#searchKeyword").attr("data-keyword"));
+		console.log($("input:checked").val());
+		
+		var searchCondition = $("option:selected").val();
+		var searchKeyword = $("#searchKeyword").attr("data-keyword");
 	$.ajax( 
 
 		{
 			url : "/product/json/listProduct",
 			type : 'post',
-			data:JSON.stringify({"currentPage":page}),
+			data:JSON.stringify({"currentPage":page,"searchCondition":searchCondition, "orderOption":$("input:checked").val() , "searchKeyword":searchKeyword}),
 			dataType : "JSON" ,
 			contentType: "application/json; charset=utf-8",
 			success : function(data){
@@ -128,7 +133,7 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 				if(data.list.length > 0 ){
 					$.each(data.list, function (idx, val){
 					console.log("닿았다")
-					var html = '<div class="col-sm-6 col-md-3"><div class="thumbnail">  <img src="/images/uploadFiles/'+val.fileName+'" width="160" height="90" alt="..."> <div class="caption">'
+					var html = '<div class="col-sm-6 col-md-3"><div class="thumbnail">  <div style="height:30%; width:100%"> <img src="/images/uploadFiles/'+val.fileName+'" width="100%" height="100%" alt="..."></div> <div class="caption">'
 					html+='<h3>'+val.prodName+'</h3>'
 					html+='<p>가격 : '+val.price+'</p>'
 					if(val.amount!=0 ){
@@ -256,7 +261,7 @@ $(function() {
 														+"</h6>";
 							//Debug...									
 							//alert(displayValue);
-							$("h3").remove();
+							$("h6").remove();
 							
 							
 						if(JSONData.amount!=0){
@@ -321,16 +326,15 @@ $(function() {
 			    <form class="form-inline" name="detailForm">
 			    
 				  <div class="form-group">
-			<input type="radio" name="orderOption" id = "orderOption0" value="0"  ${ ! empty search.orderOption && search.orderOption==0 ? "checked" : "" }/><label for = "orderOption0">상품명순</label>		 
+			<input type="radio" name="orderOption" id = "orderOption0" value="0"  ${ ! empty search.orderOption && search.orderOption==0 ? "checked" : ""  } checked="checked"/><label for = "orderOption0">상품명순</label>		 
 		<input type="radio" name="orderOption" id = "orderOption1" value="1"  ${ ! empty search.orderOption && search.orderOption==1 ? "checked" : "" }/><label for = "orderOption1">높은가격순</label>
 		<input type="radio" name="orderOption" id = "orderOption2" value="2"  ${ ! empty search.orderOption && search.orderOption==2 ? "checked" : "" }/><label for = "orderOption2">낮은가격순</label>														
 		<input type="radio" name="orderOption" id = "orderOption3" value="3"  ${ ! empty search.orderOption && search.orderOption==3 ? "checked" : "" }/><label for = "orderOption3">최신순</label>														
 		<input type="radio" name="orderOption" id = "orderOption4" value="4"  ${ ! empty search.orderOption && search.orderOption==4 ? "checked" : "" }/><label for = "orderOption4">오래된순</label>														
 			</div>
-
 			<div class="form-group">	
 			<select class="form-control" name="searchCondition" >
-				<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
+				<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" } selected="selected">상품번호</option>
 				<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option>
 				<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
 		
@@ -380,10 +384,11 @@ $(function() {
 	<c:forEach var="product" items="${list}">
 		<c:set var="i" value="${i+1}"/>
 	 
-  <div class="col-sm-6 col-md-3">
-    <div class="thumbnail">
-    
-      <img src="/images/uploadFiles/${product.fileName }" width="160" height="90" alt="...">
+  <div class="col-sm-6 col-md-3"  >
+    <div class="thumbnail" >
+    <div style="height:30%; width:100%">
+		 <img src="/images/uploadFiles/${product.fileName }" width="100%" height="100%" alt="...">
+    </div>
       <div class="caption">
   
   <h3>${product.prodName }</h3>

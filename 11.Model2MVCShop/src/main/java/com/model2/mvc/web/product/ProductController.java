@@ -85,7 +85,7 @@ public class ProductController {
 		System.out.println("======================================================================");
 		
 			
-			String temDir = "/images/uploadFiles/"; 
+			String temDir = "C:\\Users\\AIA\\git\\11MNP\\11.Model2MVCShop\\src\\main\\webapp\\images\\uploadFiles"; 
 		
 				
 			
