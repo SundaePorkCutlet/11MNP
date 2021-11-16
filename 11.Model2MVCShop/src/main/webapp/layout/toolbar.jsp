@@ -108,7 +108,12 @@
 	</div>
 </div>
 		<!-- ToolBar End /////////////////////////////////////-->
- 	
+ 	 <input type="button" value="dark" onclick="
+    document.querySelector('body').style.backgroundColor='black';
+    document.querySelector('body').style.color='white';">
+  <input type="button" value="light" onclick="
+      document.querySelector('body').style.backgroundColor='white';
+      document.querySelector('body').style.color='black';">
    	
    	
    	<script type="text/javascript">

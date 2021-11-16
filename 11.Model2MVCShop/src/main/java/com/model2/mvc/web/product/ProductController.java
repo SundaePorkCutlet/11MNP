@@ -267,6 +267,22 @@ public class ProductController {
 		System.out.println(file);
 		
 		
+		
+		String temDir = "C:\\Users\\AIA\\git\\11MNP\\11.Model2MVCShop\\src\\main\\webapp\\images\\uploadFiles"; 
+	
+			
+		
+		if(!file.getOriginalFilename().isEmpty()) {
+			file.transferTo(new File(temDir, file.getOriginalFilename()));
+			//modelAndView.addObject("msg","file업로드 성공");
+		
+		
+	}else {
+		//modelAndView.addObject("msg","file업로드 실패");
+	}
+
+		
+		
 		if(file!=null) {
 			product.setFileName(file.getOriginalFilename());
 			}

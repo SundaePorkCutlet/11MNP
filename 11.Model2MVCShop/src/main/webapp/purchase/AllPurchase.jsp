@@ -152,8 +152,9 @@ $(function() {
 	 
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail" data-price="${product.price}" data-prodNo="${product.prodNo }">
-    
-      <img src="/images/uploadFiles/${product.fileName }" width="160" height="90" alt="...">
+    <div style="height:30%; width:100%">
+      <img src="/images/uploadFiles/${product.fileName }" width="100%" height="100%" alt="...">
+      </div>
       <div class="caption">
   
   <h3>${product.prodName }</h3>

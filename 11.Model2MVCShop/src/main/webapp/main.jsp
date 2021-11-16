@@ -47,6 +47,13 @@
 	<!--  아래의 내용은 http://getbootstrap.com/getting-started/  참조 -->	
    	<div class="container">
       <!-- Main jumbotron for a primary marketing message or call to action -->
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  <input type="hidden" id="video" value=""/> <!-- 파일명 확인용 -->
 
 <video id="videoPlay" width="1200" height="600" controls autoplay loop >      
