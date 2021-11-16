@@ -59,14 +59,12 @@ function fncGetUserList(currentPage) {
 $(function() {
 	
 	 $(".getProduct1").on("click" ,function() {
-		alert('가즈아')
 		 if($(this).attr("data-amount")!=0){
 		 self.location ="/product/getProduct?prodNo="+$(this).attr("data-prodNo")
 		 }
 				});
 	 
 	 $('.getProduct2').on("click" , function() {
-		 alert('가즈아')
 		 if($(this).attr("data-amount")!=0){
 		 self.location ="/product/getProduct?prodNo="+$(this).attr("data-prodNo")
 		 }
@@ -74,7 +72,6 @@ $(function() {
 	 
 	 $('.delete').on("click" , function() {
 			
-		 alert('가즈아')
 		 self.location ="/purchase/deleteCart?prodNo="+$(this).attr("data-prodNo")
 		
 				});

@@ -59,7 +59,7 @@ function fncAddProduct(){
 	var manuDate=$("input[name='manuDate']").val();
 	var price=$("input[name='price']").val();
 	var amount=$("input[name='amount']").val();
-
+	
 	if(name == null || name.length<1){
 		alert("상품명은 반드시 입력하여야 합니다.");
 		return;

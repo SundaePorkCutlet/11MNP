@@ -65,9 +65,8 @@ ${gamePoint*-1}포인트가 날라갔습니다.
 <br><br>
 
 					<div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23">
-					<button type="button"  class="ct_btn01" style="padding-top:3px;">
+		   <div class="col-sm-offset-4  col-sm-4 text-center">
+					<button type="button" class="btn btn-primary" style="padding-top:3px;" >
 						<a href="../miniGame/randomView.jsp;">다시하기</a></button>
 			</div>
 			</div>

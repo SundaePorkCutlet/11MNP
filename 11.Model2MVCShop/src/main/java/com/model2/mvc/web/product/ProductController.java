@@ -259,9 +259,17 @@ public class ProductController {
 	
 	//@RequestMapping("/updateProduct.do")
 	@RequestMapping(value="updateProduct",method=RequestMethod.POST)
-	public ModelAndView updateProduct( @ModelAttribute("product") Product product , Model model , HttpSession session) throws Exception{
+	public ModelAndView updateProduct( @ModelAttribute("product") Product product , 
+								@RequestParam(value="fileName1", required=false) MultipartFile file,
+									Model model , HttpSession session) throws Exception{
 
 		System.out.println("/updateProduct : post");
+		System.out.println(file);
+		
+		
+		if(file!=null) {
+			product.setFileName(file.getOriginalFilename());
+			}
 		//Business Logic
 		productService.updateProduct(product);
 		ModelAndView modelAndView = new ModelAndView();

@@ -106,7 +106,7 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 		
 		console.log(window.innerHeight+'+'+window.scrollY);
 		console.log('win'+document.body.offsetHeight);
-		if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+		if((window.innerHeight + window.scrollY+1) >= document.body.offsetHeight) {
             console.log("바닥");
             ++page; 
             select_list();
@@ -173,7 +173,7 @@ $(function() {
                 url: '/product/json/autoComplete' ,
                 dataType : 'json',
                 success : function(data) {
-               
+         				
 //                     // 서버에서 JSON 데이터 RESPONSE 후 목록 추가
 //                     RESPONSE(
 //                         $.MAP(DATA, FUNCTION(ITEM) {

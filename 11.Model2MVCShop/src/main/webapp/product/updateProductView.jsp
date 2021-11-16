@@ -76,7 +76,7 @@ var name=$("input[name='prodName']").val();
 // 	document.detailForm.action='/product/updateProduct';
 // 	document.detailForm.submit();
 
-	$("form").attr("method" , "POST").attr("action" , "/product/updateProduct?amount="+${amount}).submit();
+	$("form").attr("method" , "POST").attr("action" , "/product/updateProduct").submit();
 }
 
 $(function() {
@@ -112,7 +112,7 @@ $(function() {
 	       <h3 class=" text-info">상품정보수정</h3>
 	    </div>
 	    
-	    <form class="form-horizontal">
+	    <form class="form-horizontal" enctype="multipart/form-data">
 		
 		  <div class="form-group">
 		    <label for="prodNo" class="col-sm-offset-1 col-sm-3 control-label">상품번호</label>
@@ -157,8 +157,7 @@ $(function() {
 		  <div class="form-group">
 		    <label for="fileName1" class="col-sm-offset-1 col-sm-3 control-label">상품이미지</label>
 		    <div class="col-sm-4">
-		      <input type="file" class="form-control" id="fileName1" name="filraName1" value="${product.fileName}" placeholder="상품이미지"
-		      >
+		      <input type="file" class="form-control" id="fileName1" name="fileName1" value="${product.fileName}" placeholder="상품이미지"/>
 		    </div>
 		  </div>
 		  

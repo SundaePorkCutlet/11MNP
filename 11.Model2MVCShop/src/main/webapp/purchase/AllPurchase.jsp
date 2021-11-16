@@ -1,25 +1,6 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page language="java"  contentType="text/html; charset=EUC-KR"  pageEncoding="EUC-KR"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-<%@ page import="java.util.*"  %>
-<%@ page import="com.model2.mvc.service.domain.Product" %>
-<%@ page import="com.model2.mvc.common.*" %>
-<%@ page import="com.model2.mvc.common.util.* "%>
-
-<%
-List<Product> list= (List<Product>)request.getAttribute("list");
-Page resultPage=(Page)request.getAttribute("resultPage");
-
-Search search = (Search)request.getAttribute("search");
-//==> null 을 ""(nullString)으로 변경
-String searchCondition = CommonUtil.null2str(search.getSearchCondition());
-String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
-%>
-
---%>
-
-
 
 
 <html lang="ko">
@@ -82,7 +63,6 @@ String searchKeyword = CommonUtil.null2str(search.getSearchKeyword());
 $(function() {
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 	$( "button.btn.btn-primary" ).on("click" , function() {
-		alert('gd')
 		fncGetUserList();
 		
 	});

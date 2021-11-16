@@ -426,7 +426,6 @@ public class PurchaseController {
 	
 		System.out.println("allpurchase µé·È´Ù~");
 		System.out.println(prodNo[0]);
-		System.out.println(prodNo[1]);
 		
 		model.addAttribute("prodNo",prodNo);
 		

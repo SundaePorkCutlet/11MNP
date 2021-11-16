@@ -47,7 +47,7 @@ $(function() {
 $(function() {
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 	$("#cancel").on("click" , function() {
-		history.go(-1);
+		javascript:history.go(-1);
 	});
 });	
 
